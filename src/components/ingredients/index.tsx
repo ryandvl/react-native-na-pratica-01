@@ -1,33 +1,28 @@
-import { useState } from "react";
 import { ScrollView } from "react-native";
+
+import { services } from "@/services";
 
 import { styles } from "./styles";
 
-import { Ingredient } from "../ingredient";
+import { Ingredient, IngredientsProps } from "@/components/ingredient";
 
-export function Ingredients() {
-  const [selected, setSelected] = useState<string[]>([]);
+type Props = {
+  ingredients: IngredientsProps[];
+};
 
-  function handleToggleSelected(value: string) {
-    if (selected.includes(value)) {
-      return setSelected((state) => state.filter((item) => item !== value));
-    }
-
-    setSelected((state) => [...state, value]);
-  }
-
+export function Ingredients({ ingredients }: Props) {
   return (
     <ScrollView
-      contentContainerStyle={styles.container}
-      showsVerticalScrollIndicator={false}
+      horizontal
+      style={styles.container}
+      contentContainerStyle={styles.ingredientsContent}
+      showsHorizontalScrollIndicator={false}
     >
-      {Array.from({ length: 100 }).map((_, item) => (
+      {ingredients.map((ingredient) => (
         <Ingredient
-          key={item}
-          name="Tomate"
-          image=""
-          selected={selected.includes(item.toString())}
-          onPress={() => handleToggleSelected(item.toString())}
+          key={ingredient.name}
+          name={ingredient.name}
+          image={`${services.storage.imagePath}/${ingredient.image}`}
         />
       ))}
     </ScrollView>

@@ -19,8 +19,14 @@ export const styles = StyleSheet.create({
   message: {
     fontSize: theme.fonts.size.body.md,
     fontFamily: theme.fonts.family.regular,
+    color: theme.colors.gray_400,
     marginTop: 12,
     marginBottom: 38,
-    color: theme.colors.gray_400,
+  },
+  ingredient: {
+    flexWrap: "wrap",
+    flexDirection: "row",
+    paddingBottom: 200,
+    gap: 12,
   },
 });
